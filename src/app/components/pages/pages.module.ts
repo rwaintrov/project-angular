@@ -25,6 +25,8 @@ import { CveComponent } from './cve/cve.component';
 import { PasComponent } from './pas/pas.component';
 import {TableModule} from "primeng/table";
 import {MenuModule} from "primeng/menu";
+import { ChartModule } from 'primeng/chart';
+import {ButtonModule} from "primeng/button";
 // import {ChartModule} from "primeng/chart";
 
 
@@ -60,6 +62,8 @@ import {MenuModule} from "primeng/menu";
     DropdownModule,
     TableModule,
     MenuModule,
+    ChartModule,
+    ButtonModule,
     // ChartModule,
 
   ]

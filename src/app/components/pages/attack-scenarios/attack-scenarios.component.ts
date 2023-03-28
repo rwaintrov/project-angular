@@ -4,6 +4,7 @@ import {MenuItem} from "primeng/api";
 import {AppConfig, LayoutService} from "../../../services/layout.service";
 import {Product, ProductService} from "../product.service";
 import {Table} from "primeng/table";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-attack-scenarios',
@@ -42,8 +43,10 @@ export class AttackScenariosComponent implements OnInit{
   teamMembers: any[] = [];
 
   selectedOrderWeek!: any;
+  item: any;
 
-  constructor(private productService: ProductService, private layoutService: LayoutService) {
+
+  constructor(private productService: ProductService, private layoutService: LayoutService,private route :Router) {
     this.subscription = this.layoutService.configUpdate$.subscribe(config => {
       this.config = config;
       this.initCharts();
@@ -84,43 +87,43 @@ export class AttackScenariosComponent implements OnInit{
 
     this.metrics = [
       {
-        title: 'Orders',
-        icon: 'pi pi-shopping-cart',
+        title: 'Active Devices',
+        // icon: 'pi pi-shopping-cart',
         color_light: '#64B5F6',
         color_dark: '#1976D2',
         textContent: [
-          {amount: '640', text: 'Pending'},
-          {amount: '1420', text: 'Completed'}
+          {amount: '90', text: 'Dedected'},
+          {amount: '15', text: 'At Risk'}
         ]
       },
       {
-        title: 'Revenue',
-        icon: 'pi pi-dollar',
+        title: 'PAS',
+        // icon: 'pi pi-dollar',
         color_light: '#7986CB',
         color_dark: '#303F9F',
         textContent: [
-          {amount: '$2,100', text: 'Expenses'},
-          {amount: '$9,640', text: 'Income'}
+          {amount: '9', text: 'Dedecteed'},
+          {amount: '84%', text: 'Avg.Probability'}
         ]
       },
       {
-        title: 'Customers',
-        icon: 'pi pi-users',
+        title: 'Affecting CVEs',
+        // icon: 'pi pi-users',
         color_light: '#4DB6AC',
         color_dark: '#00796B',
         textContent: [
-          {amount: 8272, text: 'Active'},
-          {amount: 25402, text: 'Registered'}
+          {amount: 18, text: 'Detected'},
+          {amount: 'HIGH', text: 'AVG. Criticality'}
         ]
       },
       {
-        title: 'Comments',
-        icon: 'pi pi-users',
+        title: 'Alerts',
+        // icon: 'pi pi-users',
         color_light: '#4DD0E1',
         color_dark: '#0097A7',
         textContent: [
-          {amount: 12, text: 'New'},
-          {amount: 85, text: 'Responded'}
+          {amount: 1, text: 'in last 24 hours'},
+          // {amount: 85, text: 'Responded'}
         ]
       }
     ];
@@ -334,4 +337,30 @@ export class AttackScenariosComponent implements OnInit{
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+  a(i:any) {
+    switch (i) {
+      case 0:
+        this.route.navigate(['device']);
+        break;
+      case 1:
+        this.route.navigate(['PAS'])
+        break;
+      case 2:
+        this.route.navigate(['CVE'])
+        break;
+      case 3:
+        this.route.navigate(['alert'])
+        break;
+      default:
+        console.log("error");
+        break;
+    }
+    // console.log(i)
+    // if (i==0)
+    //   this.route.navigate(['device']);
+    // if (i==1)
+    //   this.route.navigate(['PAS'])
+  }
+
+
 }
